@@ -43,7 +43,7 @@
     UITextField *tfName = (UITextField *)[self.table viewWithTag:600];
     UITextField *tfPrice = (UITextField *)[self.table viewWithTag:601];
     UITextField *tfIntro = (UITextField *)[self.table viewWithTag:602];
-    UITextField *tfSpe = (UITextField *)[self.table viewWithTag:602];
+    UITextField *tfSpe = (UITextField *)[self.table viewWithTag:603];
     [tfName resignFirstResponder];
     [tfPrice resignFirstResponder];
     [tfIntro resignFirstResponder];
@@ -63,10 +63,10 @@
     // 验证手机号等等
     NSDictionary *postDic = @{
                               @"id": _dicProduct[@"_id"] ? _dicProduct[@"_id"] : @"",
-                              @"name": _dicProduct[@"name"],
-                              @"price": _dicProduct[@"price"],
-                              @"intro": _dicProduct[@"intro"],
-                              @"spe": _dicProduct[@"spe"],
+                              @"name": _dicProduct[@"name"] ? _dicProduct[@"name"] : @"",
+                              @"price": _dicProduct[@"price"] ? _dicProduct[@"price"] : @"",
+                              @"intro": _dicProduct[@"intro"] ? _dicProduct[@"intro"] : @"",
+                              @"spe": _dicProduct[@"spe"] ? _dicProduct[@"spe"] : @"",
                               @"img": _dicProduct[@"img"] ? _dicProduct[@"img"] : @"",
                               @"command": @"initProduct"
                               };

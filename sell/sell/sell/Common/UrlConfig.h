@@ -12,10 +12,10 @@
 //#define HttpUrl @"http://169.254.200.80:3200/v1"
 //#define ImageURL(r) [NSString stringWithFormat:@"http://169.254.200.80:3200/image?id=%@",(r)]
 
-#define HttpUrl @"http://192.168.199.206:3200/v1"
-#define ImageURL(r) [NSString stringWithFormat:@"http://192.168.199.206:3200/image?id=%@",(r)]
+//#define HttpUrl @"http://192.168.199.206:3200/v1"
+//#define ImageURL(r) [NSString stringWithFormat:@"http://192.168.199.206:3200/image?id=%@",(r)]
 
-//#define HttpUrl @"http://localhost:3200/v1"
-//#define ImageURL(r) [NSString stringWithFormat:@"http://localhost:3200/image?id=%@",(r)]
+#define HttpUrl @"http://localhost:3200/v1"
+#define ImageURL(r) [NSString stringWithFormat:@"http://localhost:3200/image?id=%@",(r)]
 
 #endif

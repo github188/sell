@@ -7,8 +7,9 @@
 //
 
 #import "MyViewController.h"
-#import "AddressListViewController.h"
 #import "LoginViewController.h"
+#import "ActivityListViewController.h"
+#import "NewFeedbackViewController.h"
 
 @interface MyViewController ()
 
@@ -58,7 +59,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 3;
+        return 4;
     }
     else {
         return 1;
@@ -104,8 +105,7 @@
             make.bottom.mas_equalTo(@(-1));
             make.width.mas_equalTo(@105);
         }];
-        if (indexPath.row == 0) {
-            name.text = @"常用地址";
+        if (indexPath.row == 0 || indexPath.row == 1) {
             UIImageView *arrow = [UIImageView new];
             arrow.tag = 403;
             arrow.backgroundColor = [UIColor clearColor];
@@ -117,10 +117,17 @@
                 make.width.height.mas_equalTo(@(21.0));
             }];
         }
+        
+        if (indexPath.row == 0) {
+            name.text = @"活动";
+        }
         else if (indexPath.row == 1) {
-            name.text = @"清除缓存";
+            name.text = @"意见反馈";
         }
         else if (indexPath.row == 2) {
+            name.text = @"清除缓存";
+        }
+        else if (indexPath.row == 3) {
             name.text = @"修改密码";
         }
     }
@@ -145,11 +152,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            AddressListViewController *viewController = [AddressListViewController new];
-            viewController.stateOfAddress = StateOfJustEdit;
+            ActivityListViewController *viewController = [ActivityListViewController new];
             [self.navigationController pushViewController:viewController animated:YES];
         }
         else if (indexPath.row == 1) {
+            NewFeedbackViewController *viewController = [NewFeedbackViewController new];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else if (indexPath.row == 2) {
             // 清楚缓存
             UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"您确定要清楚缓存吗？"
                                                                      delegate:self
@@ -159,7 +169,7 @@
             actionSheet.tag = 10;
             [actionSheet showInView:self.view];
         }
-        else if (indexPath.row == 2) {
+        else if (indexPath.row == 3) {
             LoginViewController *viewController = [LoginViewController new];
             viewController.stateOfRegister = changePasswordPage;
             [self.navigationController pushViewController:viewController animated:YES];

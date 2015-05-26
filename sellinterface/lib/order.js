@@ -34,7 +34,7 @@ exports.initOrder = function(req,callback){
         initTime : new Date(),
         changeTime : new Date(),
         payType : "",
-        state : 1          // 1、未支付   2、已支付待配送   3、已配送   4、已完成
+        state : 4          // 1、未支付   2、已支付待配送   3、已配送   4、已完成
     };
     console.log("order--->>>",order);
     orderProvider.insert(order,{},function(err){

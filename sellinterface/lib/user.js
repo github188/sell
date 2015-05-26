@@ -12,6 +12,10 @@ var AddressProvider = require("../modules/dao/AddressProvider").AddressProvider;
 var addressProvider = new AddressProvider();
 var BinaryProvider = require("../modules/BinaryProvider").BinaryProvider;
 var binaryProvider = new BinaryProvider();
+var FeedbackProvider = require("../modules/dao/FeedbackProvider").FeedbackProvider;
+var feedbackProvider = new FeedbackProvider();
+var ActivityProvider = require("../modules/dao/ActivityProvider").ActivityProvider;
+var activityProvider = new ActivityProvider();
 
 // 获取验证码
 exports.getCode = function(req,callback){
@@ -279,3 +283,116 @@ exports.loadImage = function(req,res){
         }
     })
 };
+
+// 意见反馈
+exports.newFeedback = function(req,callback){
+    var userId = req.query.userId;
+    var feedback = req.query.feedback;
+    userProvider.findOne({},{},function(err,result){
+        if (err || result == null) {
+            logger.warn(global.warnCode.userNotExistError,":",req.url,req.body);
+            callback(global.warnCode.userNotExistError);
+        } else {
+            var json = {
+                _id : new ObjectID(),
+                userId : userId,
+                userPhone : result.phone,
+                feedback : feedback
+            };
+            feedbackProvider.insert(json, {}, function(err){
+                if (err) {
+                    logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+                    callback(global.warnCode.adminDbError);
+                }
+                else {
+                    callback({"result":true,"isSuccess":true,message:""});
+                }
+            });
+        }
+    });
+};
+
+// 反馈列表
+exports.feedbackList = function(req, callback){
+    feedbackProvider.find({}, {}, function(err,result){
+        if (err) {
+            logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+            callback(global.warnCode.adminDbError);
+        }
+        else {
+            callback({"result":true,"isSuccess":true,message:"",list:result});
+        }
+    });
+};
+
+// 意见反馈
+exports.newActivity = function(req,callback){
+    var activity = req.query.activity;
+    var json = {
+        _id : new ObjectID(),
+        activity : activity,
+        date : new Date()
+    };
+    activityProvider.insert(json, {}, function(err){
+        if (err) {
+            logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+            callback(global.warnCode.adminDbError);
+        }
+        else {
+            callback({"result":true,"isSuccess":true,message:""});
+        }
+    });
+};
+
+// 活动列表
+exports.activityList = function(req, callback){
+    activityProvider.find({}, {}, function(err,result){
+        if (err) {
+            logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+            callback(global.warnCode.adminDbError);
+        }
+        else {
+            for (var i = 0; i < result.length; i ++) {
+                result[i].date = format(result[i].date, "yyyy-MM-dd hh:mm:ss");
+            };
+            callback({"result":true,"isSuccess":true,message:"",list:result});
+        }
+    });
+};
+
+//时间格式转换
+function format(d, format) {
+//        {date} d
+//        日期
+//        {string} format
+//        日期格式：yyyy-MM-dd w hh:mm:ss
+//        yyyy/yy 表示年份
+//        MM/M 月份
+//        w 星期
+//        dd/d 日
+//        hh/h 小时
+//        mm/m 分
+//        ss/s 秒
+
+    var str = format;
+    var Week = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    var month = d.getMonth() + 1;
+
+    str = str.replace(/yyyy/, d.getFullYear());
+    str = str.replace(/yy/, (d.getYear() % 100) > 9 ? (d.getYear() % 100).toString() : '0' + (d.getYear() % 100));
+    str = str.replace(/MM/, month > 9 ? month.toString() : '0' + month);
+    str = str.replace(/M/g, month);
+    str = str.replace(/dd/, d.getDate() > 9 ? d.getDate().toString() : '0' + d.getDate());
+    str = str.replace(/d/g, d.getDate());
+
+    str = str.replace(/w/g, Week[d.getDay()]);
+
+    str = str.replace(/hh/, d.getHours() > 9 ? d.getHours().toString() : '0' + d.getHours());
+    str = str.replace(/h/g, d.getHours());
+    str = str.replace(/mm/, d.getMinutes() > 9 ? d.getMinutes().toString() : '0' + d.getMinutes());
+    str = str.replace(/m/g, d.getMinutes());
+    str = str.replace(/ss/, d.getSeconds() > 9 ? d.getSeconds().toString() : '0' + d.getSeconds());
+    str = str.replace(/s/g, d.getSeconds());
+    console.log(str);
+    return str;
+}

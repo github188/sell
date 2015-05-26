@@ -84,15 +84,19 @@
             make.top.height.right.mas_equalTo(cell.contentView);
         }];
     }
+    UIImageView *icon = (UIImageView *)[cell.contentView viewWithTag:1];
     UILabel *lab = (UILabel *)[cell.contentView viewWithTag:2];
     if (indexPath.row == 0) {
         lab.text = @"购买";
+        icon.image = ImageNamed(@"");
     }
     else if (indexPath.row == 1) {
         lab.text = @"订单";
+        icon.image = ImageNamed(@"");
     }
     else if (indexPath.row == 2) {
         lab.text = @"我的";
+        icon.image = ImageNamed(@"");
     }
     return cell;
 }

@@ -254,7 +254,7 @@
     }];
     [_scrView setContentOffset:CGPointMake(0, 0) animated:YES];
     // 如果登录了 直接进首页
-    if ([userDefaults objectForKey:@"phone"]) {
+    if ([userDefaults objectForKey:@"phone"] && self.stateOfRegister != changePasswordPage) {
         if ([[userDefaults objectForKey:@"type"] isEqualToString:@"admin"]) {
             AdminHomeViewController *viewController = [AdminHomeViewController new];
             [self.navigationController pushViewController:viewController animated:NO];

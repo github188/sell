@@ -8,7 +8,8 @@
 
 #import "AdminHomeViewController.h"
 #import "AdminProListViewController.h"
-#import "AdminOrderViewController.h"
+#import "AdminNewActivityViewController.h"
+#import "AdminFeedbackViewController.h"
 
 @interface AdminHomeViewController ()
 
@@ -65,7 +66,7 @@
     if (section) {
         return 1;
     }
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,7 +92,15 @@
         make.left.top.width.height.mas_equalTo(cell.contentView);
     }];
     if (indexPath.section == 0) {
-        product.text = indexPath.row ? @"订单管理" : @"管理产品";
+        if (indexPath.row == 0) {
+            product.text = @"订单管理";
+        }
+        else if (indexPath.row == 1) {
+            product.text = @"反馈列表";
+        }
+        else {
+            product.text = @"发布活动";
+        }
     }
     else {
         product.text = @"退出登录";
@@ -119,8 +128,12 @@
             AdminProListViewController *viewController = [AdminProListViewController new];
             [self.navigationController pushViewController:viewController animated:YES];
         }
+        else if (indexPath.row == 1) {
+            AdminFeedbackViewController *viewController = [AdminFeedbackViewController new];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
         else {
-            AdminOrderViewController *viewController = [AdminOrderViewController new];
+            AdminNewActivityViewController *viewController = [AdminNewActivityViewController new];
             [self.navigationController pushViewController:viewController animated:YES];
         }
     }

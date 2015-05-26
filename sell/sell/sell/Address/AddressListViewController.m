@@ -140,7 +140,7 @@
 {
     AddressDetailViewController *viewController = [AddressDetailViewController new];
     viewController.stateOfAddress = StateChangeAddress;
-    viewController.dicData = _arrData[sender.tag - 1200];
+    viewController.dicData = [_arrData[sender.tag - 1200] mutableCopy];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -286,7 +286,7 @@
     if (self.stateOfAddress == StateOfJustEdit) {
         // 直接去编辑
         UIButton *btn = [UIButton new];
-        btn.tag = indexPath.row * 1000;
+        btn.tag = indexPath.row + 1200;
         [self editAddress:btn];
     }
     else {

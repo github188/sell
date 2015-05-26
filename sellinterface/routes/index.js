@@ -137,3 +137,33 @@ orderList = function(req,callback){
         callback(sendRes);
     });
 };
+
+//**************************************** 意见反馈 活动
+
+// 意见反馈
+newFeedback = function(req,callback){
+    user.newFeedback(req,function(sendRes){
+        callback(sendRes);
+    });
+};
+
+// 反馈列表
+feedbackList = function(req,callback){
+    user.feedbackList(req,function(sendRes){
+        callback(sendRes);
+    });
+};
+
+// 意见反馈
+newActivity = function(req,callback){
+    user.newActivity(req,function(sendRes){
+        callback(sendRes);
+    });
+};
+
+// 活动列表
+activityList = function(req,callback){
+    user.activityList(req,function(sendRes){
+        callback(sendRes);
+    });
+};
