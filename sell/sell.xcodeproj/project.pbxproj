@@ -55,10 +55,12 @@
 		2D62B5E61AF3AB0200B68F7D /* AdminHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D62B5E51AF3AB0200B68F7D /* AdminHomeViewController.m */; };
 		2D62B5E91AF4FA3100B68F7D /* AdminProListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D62B5E81AF4FA3100B68F7D /* AdminProListViewController.m */; };
 		2D62B5EC1AF4FA5300B68F7D /* AdminProDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D62B5EB1AF4FA5300B68F7D /* AdminProDetailViewController.m */; };
-		2D62B5EF1AF4FBE200B68F7D /* AdminOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D62B5EE1AF4FBE200B68F7D /* AdminOrderViewController.m */; };
 		2D62B5F11AF5030300B68F7D /* buy_img_load_fail.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D62B5F01AF5030300B68F7D /* buy_img_load_fail.png */; };
-		2D62B5F41AF7C81E00B68F7D /* AdminOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D62B5F31AF7C81E00B68F7D /* AdminOrderDetailViewController.m */; };
 		2D7B289F1ADC0C580083C12B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7B289E1ADC0C580083C12B /* HomeViewController.m */; };
+		2D80C4241B14B32400DEE6E2 /* AdminNewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D80C4231B14B32400DEE6E2 /* AdminNewActivityViewController.m */; };
+		2D80C4271B14B51E00DEE6E2 /* AdminFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D80C4261B14B51E00DEE6E2 /* AdminFeedbackViewController.m */; };
+		2D80C42A1B14BC5700DEE6E2 /* ActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D80C4291B14BC5700DEE6E2 /* ActivityListViewController.m */; };
+		2D80C42D1B14BC6800DEE6E2 /* NewFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D80C42C1B14BC6800DEE6E2 /* NewFeedbackViewController.m */; };
 		2DD0B7951AEBBD4B00076038 /* common_icon_order_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0B7941AEBBD4B00076038 /* common_icon_order_normal.png */; };
 		2DD0B79C1AEBC1C600076038 /* buy_btn_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0B7991AEBC1C600076038 /* buy_btn_minus.png */; };
 		2DD0B79D1AEBC1C600076038 /* buy_btn_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DD0B79A1AEBC1C600076038 /* buy_btn_plus.png */; };
@@ -163,13 +165,17 @@
 		2D62B5E81AF4FA3100B68F7D /* AdminProListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminProListViewController.m; sourceTree = "<group>"; };
 		2D62B5EA1AF4FA5300B68F7D /* AdminProDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminProDetailViewController.h; sourceTree = "<group>"; };
 		2D62B5EB1AF4FA5300B68F7D /* AdminProDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminProDetailViewController.m; sourceTree = "<group>"; };
-		2D62B5ED1AF4FBE200B68F7D /* AdminOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminOrderViewController.h; sourceTree = "<group>"; };
-		2D62B5EE1AF4FBE200B68F7D /* AdminOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminOrderViewController.m; sourceTree = "<group>"; };
 		2D62B5F01AF5030300B68F7D /* buy_img_load_fail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy_img_load_fail.png; sourceTree = "<group>"; };
-		2D62B5F21AF7C81E00B68F7D /* AdminOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminOrderDetailViewController.h; sourceTree = "<group>"; };
-		2D62B5F31AF7C81E00B68F7D /* AdminOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminOrderDetailViewController.m; sourceTree = "<group>"; };
 		2D7B289D1ADC0C580083C12B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		2D7B289E1ADC0C580083C12B /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		2D80C4221B14B32400DEE6E2 /* AdminNewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminNewActivityViewController.h; sourceTree = "<group>"; };
+		2D80C4231B14B32400DEE6E2 /* AdminNewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminNewActivityViewController.m; sourceTree = "<group>"; };
+		2D80C4251B14B51E00DEE6E2 /* AdminFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminFeedbackViewController.h; sourceTree = "<group>"; };
+		2D80C4261B14B51E00DEE6E2 /* AdminFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminFeedbackViewController.m; sourceTree = "<group>"; };
+		2D80C4281B14BC5700DEE6E2 /* ActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListViewController.h; sourceTree = "<group>"; };
+		2D80C4291B14BC5700DEE6E2 /* ActivityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListViewController.m; sourceTree = "<group>"; };
+		2D80C42B1B14BC6800DEE6E2 /* NewFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeedbackViewController.h; sourceTree = "<group>"; };
+		2D80C42C1B14BC6800DEE6E2 /* NewFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeedbackViewController.m; sourceTree = "<group>"; };
 		2DD0B7941AEBBD4B00076038 /* common_icon_order_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = common_icon_order_normal.png; sourceTree = "<group>"; };
 		2DD0B7991AEBC1C600076038 /* buy_btn_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy_btn_minus.png; sourceTree = "<group>"; };
 		2DD0B79A1AEBC1C600076038 /* buy_btn_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buy_btn_plus.png; sourceTree = "<group>"; };
@@ -365,6 +371,10 @@
 			children = (
 				2D62B5DE1AF38F2000B68F7D /* MyViewController.h */,
 				2D62B5DF1AF38F2000B68F7D /* MyViewController.m */,
+				2D80C4281B14BC5700DEE6E2 /* ActivityListViewController.h */,
+				2D80C4291B14BC5700DEE6E2 /* ActivityListViewController.m */,
+				2D80C42B1B14BC6800DEE6E2 /* NewFeedbackViewController.h */,
+				2D80C42C1B14BC6800DEE6E2 /* NewFeedbackViewController.m */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -400,10 +410,10 @@
 				2D62B5E81AF4FA3100B68F7D /* AdminProListViewController.m */,
 				2D62B5EA1AF4FA5300B68F7D /* AdminProDetailViewController.h */,
 				2D62B5EB1AF4FA5300B68F7D /* AdminProDetailViewController.m */,
-				2D62B5ED1AF4FBE200B68F7D /* AdminOrderViewController.h */,
-				2D62B5EE1AF4FBE200B68F7D /* AdminOrderViewController.m */,
-				2D62B5F21AF7C81E00B68F7D /* AdminOrderDetailViewController.h */,
-				2D62B5F31AF7C81E00B68F7D /* AdminOrderDetailViewController.m */,
+				2D80C4221B14B32400DEE6E2 /* AdminNewActivityViewController.h */,
+				2D80C4231B14B32400DEE6E2 /* AdminNewActivityViewController.m */,
+				2D80C4251B14B51E00DEE6E2 /* AdminFeedbackViewController.h */,
+				2D80C4261B14B51E00DEE6E2 /* AdminFeedbackViewController.m */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -492,20 +502,21 @@
 			files = (
 				2D1A78B01ADA0AF90061E88F /* AFHTTPRequestOperation.m in Sources */,
 				2D1A78BF1ADA0AF90061E88F /* NSArray+MASAdditions.m in Sources */,
-				2D62B5F41AF7C81E00B68F7D /* AdminOrderDetailViewController.m in Sources */,
-				2D62B5EF1AF4FBE200B68F7D /* AdminOrderViewController.m in Sources */,
 				2D1A78641ADA08070061E88F /* LoginViewController.m in Sources */,
 				2D1A78C01ADA0AF90061E88F /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				2D62B5C81AF3450800B68F7D /* OrderDetailViewController.m in Sources */,
 				2D62B5E91AF4FA3100B68F7D /* AdminProListViewController.m in Sources */,
 				2D1A78B11ADA0AF90061E88F /* AFHTTPRequestOperationManager.m in Sources */,
 				2D1A78B31ADA0AF90061E88F /* AFNetworkReachabilityManager.m in Sources */,
+				2D80C4241B14B32400DEE6E2 /* AdminNewActivityViewController.m in Sources */,
 				2D1A78BD1ADA0AF90061E88F /* MASViewAttribute.m in Sources */,
 				2D1A78BC1ADA0AF90061E88F /* MASLayoutConstraint.m in Sources */,
 				2D1A78B91ADA0AF90061E88F /* MASCompositeConstraint.m in Sources */,
 				2D1A78B71ADA0AF90061E88F /* AFURLResponseSerialization.m in Sources */,
 				2D62B5C01AF3445500B68F7D /* ProductDetailViewController.m in Sources */,
 				2D62B5CB1AF3458900B68F7D /* PaySuccessViewController.m in Sources */,
+				2D80C4271B14B51E00DEE6E2 /* AdminFeedbackViewController.m in Sources */,
+				2D80C42D1B14BC6800DEE6E2 /* NewFeedbackViewController.m in Sources */,
 				2D62B5E61AF3AB0200B68F7D /* AdminHomeViewController.m in Sources */,
 				2DFCEE871AE9343E008E23D2 /* CommonTool.m in Sources */,
 				2D1A78CF1ADA0B8A0061E88F /* Reachability.m in Sources */,
@@ -528,6 +539,7 @@
 				2D1A78BA1ADA0AF90061E88F /* MASConstraint.m in Sources */,
 				2D62B5D11AF345DA00B68F7D /* AddressDetailViewController.m in Sources */,
 				2D1A785E1ADA08070061E88F /* main.m in Sources */,
+				2D80C42A1B14BC5700DEE6E2 /* ActivityListViewController.m in Sources */,
 				2D1A78CC1ADA0B0D0061E88F /* ImageCache.m in Sources */,
 				2D1A78C11ADA0AF90061E88F /* View+MASAdditions.m in Sources */,
 				2D62B5C51AF344F000B68F7D /* OrderListViewController.m in Sources */,
