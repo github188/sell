@@ -24,13 +24,15 @@
     [super viewDidLoad];
     [self setControllerTitle:@"收货地址"];
     WS(ws);
-    [self.btnRight setBackgroundImage:ImageNamed(@"buy_icon_new-address.png") forState:UIControlStateNormal];
-    [self.btnRight mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(@21);
-        make.right.mas_equalTo(@(-10));
-        make.top.mas_equalTo(@31);
-    }];
-    [self setRightBtnShow];
+    if (self.stateOfAddress == StateOfJustEdit) {
+        [self.btnRight setBackgroundImage:ImageNamed(@"buy_icon_new-address.png") forState:UIControlStateNormal];
+        [self.btnRight mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(@21);
+            make.right.mas_equalTo(@(-10));
+            make.top.mas_equalTo(@31);
+        }];
+        [self setRightBtnShow];
+    }
     
     // 没有列表时候的提示内容
     self.viewNoList = [UIView new];
@@ -136,14 +138,6 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (IBAction)editAddress:(UIButton *)sender
-{
-    AddressDetailViewController *viewController = [AddressDetailViewController new];
-    viewController.stateOfAddress = StateChangeAddress;
-    viewController.dicData = [_arrData[sender.tag - 1200] mutableCopy];
-    [self.navigationController pushViewController:viewController animated:YES];
-}
-
 #pragma mark - table
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -153,7 +147,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 110.0;  // 有待商榷
+    return 50.0;  //
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,39 +168,10 @@
         [cell.contentView addSubview:labName];
         [labName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(@53);
-            make.right.mas_equalTo(@(-110));
-            make.top.mas_equalTo(@19);
-            make.height.mas_equalTo(@32);
+            make.top.height.right.mas_equalTo(cell.contentView);
         }];
-        UILabel *labAddress = [UILabel new];
-        labAddress.tag = 111;
-        labAddress.backgroundColor = [UIColor clearColor];
-        labAddress.font = fontWithSize(16);
-        labAddress.textColor = RGBCOLOR(102, 102, 102);
-        labAddress.textAlignment = NSTextAlignmentLeft;
-        [cell.contentView addSubview:labAddress];
-        [labAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(labName.mas_bottom);
-            make.right.mas_equalTo(@(-60));
-            make.left.mas_equalTo(@53);
-            make.height.mas_equalTo(@22);
-        }];
-        UILabel *labPhone = [UILabel new];
-        labPhone.tag = 112;
-        labPhone.backgroundColor = [UIColor clearColor];
-        labPhone.font = fontWithSize(22);
-        labPhone.textColor = FontColor;
-        labPhone.textAlignment = NSTextAlignmentLeft;
-        [cell.contentView addSubview:labPhone];
-        [labPhone mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(labAddress.mas_bottom);
-            make.right.mas_equalTo(@(-110));
-            make.left.mas_equalTo(@53);
-            make.height.mas_equalTo(@32);
-        }];
-        
         UIImageView *sure = [UIImageView new];
-        sure.tag = 113;
+        sure.hidden = YES;
         sure.tag = indexPath.row * 1000 + 401;
         sure.backgroundColor = [UIColor clearColor];
         sure.image = ImageNamed(@"buy_img_on.png");
@@ -215,16 +180,6 @@
             make.centerY.mas_equalTo(cell.contentView);
             make.left.mas_equalTo(18.0);
             make.width.height.mas_equalTo(@(24.0));
-        }];
-        UIImageView *arrow = [UIImageView new];
-        arrow.tag = 403;
-        arrow.backgroundColor = [UIColor clearColor];
-        arrow.image = ImageNamed(@"buy_icon_more.png");
-        [cell.contentView addSubview:arrow];
-        [arrow mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(cell.contentView);
-            make.right.mas_equalTo(@(-11.0));
-            make.width.height.mas_equalTo(@(21.0));
         }];
         if (indexPath.row == 0) {
             // 线
@@ -244,16 +199,6 @@
             make.centerX.width.bottom.mas_equalTo(cell.contentView);
             make.height.mas_equalTo(@1);
         }];
-        
-        // 编辑
-        UIButton *btnEdit = [UIButton new];
-        btnEdit.backgroundColor = [UIColor clearColor];
-        [btnEdit addTarget:self action:@selector(editAddress:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:btnEdit];
-        [btnEdit mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.top.bottom.mas_equalTo(cell.contentView);
-            make.width.mas_equalTo(@50);
-        }];
     }
     
     for (UIButton *btn in cell.contentView.subviews) {
@@ -263,19 +208,7 @@
     }
     NSDictionary *dic = self.arrData[indexPath.row];
     UILabel *labName = (UILabel *)[cell.contentView viewWithTag:110];
-    UILabel *labAddress = (UILabel *)[cell.contentView viewWithTag:111];
-    UILabel *labPhone = (UILabel *)[cell.contentView viewWithTag:112];
-    UIImageView *sure = (UIImageView *)[cell.contentView viewWithTag:113];
-    labName.text = dic[@"name"];
-    labAddress.text = dic[@"address"];
-    labPhone.text = dic[@"phone"];
-    // 我的 里面不需要选择
-    if (self.stateOfAddress == StateOfJustEdit) {
-        sure.hidden = YES;
-    }
-    else {
-        
-    }
+    labName.text = dic[@"address"];
     
     return cell;
 }
@@ -285,9 +218,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (self.stateOfAddress == StateOfJustEdit) {
         // 直接去编辑
-        UIButton *btn = [UIButton new];
-        btn.tag = indexPath.row + 1200;
-        [self editAddress:btn];
+        AddressDetailViewController *viewController = [AddressDetailViewController new];
+        viewController.stateOfAddress = StateChangeAddress;
+        viewController.dicData = [_arrData[indexPath.row] mutableCopy];
+        [self.navigationController pushViewController:viewController animated:YES];
     }
     else {
         for (NSUInteger i = 0; i < _arrData.count; i ++) {

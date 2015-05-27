@@ -18,10 +18,6 @@
 @property (nonatomic, strong) UILabel *labTotle;            // 总价
 @property (nonatomic, strong) NSString *strPlistPath;       // plist地址
 @property (nonatomic, strong) UIButton *btnAddress;         // 选择地址
-@property (nonatomic, strong) UIView *viewAddress;          // 地址
-@property (nonatomic, strong) UILabel *labName;             // 姓名
-@property (nonatomic, strong) UILabel *labPhone;            // 电话
-@property (nonatomic, strong) UILabel *labAddress;          // 地址
 @property (nonatomic, strong) NSString *strAddressId;       // AddressId
 @property (nonatomic, strong) NSString *orderid;            // 订单id
 
@@ -102,75 +98,18 @@
         make.left.mas_equalTo(@20);
         make.right.mas_equalTo(@0);
     }];
-    UIView *address = [UIView new];
-    address.backgroundColor = [UIColor whiteColor];
-    [self.table.tableHeaderView addSubview:address];
-    [address mas_makeConstraints:^(MASConstraintMaker *make) {
+    _btnAddress = [UIButton new];
+    _btnAddress.backgroundColor = [UIColor whiteColor];
+    [_btnAddress setTitle:@"请选择地址" forState:UIControlStateNormal];
+    [_btnAddress setTitleColor:FontColor forState:UIControlStateNormal];
+    _btnAddress.titleLabel.font = fontWithSize(17);
+    [_btnAddress addTarget:self action:@selector(clickAddress:) forControlEvents:UIControlEventTouchUpInside];
+    [self.table.tableHeaderView addSubview:_btnAddress];
+    [_btnAddress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(@0);
         make.width.mas_equalTo(ws.table.tableHeaderView);
         make.top.mas_equalTo(labAddress.mas_bottom);
         make.height.mas_equalTo(@(59));
-    }];
-    _viewAddress = [UIView new];
-    _viewAddress.backgroundColor = [UIColor clearColor];
-    _viewAddress.hidden = YES;
-    [address addSubview:_viewAddress];
-    [_viewAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.width.height.mas_equalTo(address);
-    }];
-    _labName = [UILabel new];
-    _labName.backgroundColor = [UIColor clearColor];
-    _labName.font = fontWithSize(16);
-    _labName.textColor = RGBCOLOR(51, 51, 51);
-    _labName.textAlignment = NSTextAlignmentLeft;
-    [self.viewAddress addSubview:_labName];
-    [_labName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.viewAddress);
-        make.left.mas_equalTo(ws.viewAddress).with.offset(20);
-        make.height.mas_equalTo(@34);
-        make.width.mas_equalTo(@(WINDOW_WIDTH/2 - 10));
-    }];
-    _labAddress = [UILabel new];
-    _labAddress.backgroundColor = [UIColor clearColor];
-    _labAddress.font = fontWithSize(12);
-    _labAddress.textColor = RGBCOLOR(51, 51, 51);
-    _labAddress.textAlignment = NSTextAlignmentLeft;
-    [self.viewAddress addSubview:_labAddress];
-    [_labAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws.viewAddress).with.offset(Design_Width(-40.0) - 21 - 5);
-        make.bottom.mas_equalTo(ws.viewAddress);
-        make.left.mas_equalTo(ws.labName);
-        make.height.mas_equalTo(@30);
-    }];
-    _labPhone = [UILabel new];
-    _labPhone.backgroundColor = [UIColor clearColor];
-    _labPhone.font = fontWithSize(16);
-    _labPhone.textColor = RGBCOLOR(51, 51, 51);
-    _labPhone.textAlignment = NSTextAlignmentRight;
-    [self.viewAddress addSubview:_labPhone];
-    [_labPhone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws.labAddress.mas_right);
-        make.height.mas_equalTo(@34);
-        make.top.mas_equalTo(@0);
-        make.left.mas_equalTo(ws.labName.mas_right);
-    }];
-    UIImageView *arrow2 = [UIImageView new];
-    arrow2.backgroundColor = [UIColor clearColor];
-    arrow2.image = ImageNamed(@"buy_icon_more.png");
-    [address addSubview:arrow2];
-    [arrow2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(address);
-        make.right.mas_equalTo(@(Design_Width(-40.0)));
-        make.width.height.mas_equalTo(@(21.0));
-    }];
-    _btnAddress = [UIButton new];
-    [_btnAddress setTitle:@"请选择收货地址" forState:UIControlStateNormal];
-    [_btnAddress setTitleColor:FontColor forState:UIControlStateNormal];
-    _btnAddress.titleLabel.font = fontWithSize(17);
-    [_btnAddress addTarget:self action:@selector(clickAddress:) forControlEvents:UIControlEventTouchUpInside];
-    [address addSubview:_btnAddress];
-    [_btnAddress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.width.height.mas_equalTo(address);
     }];
     // 送货地址
     UILabel *labList = [UILabel new];
@@ -181,37 +120,24 @@
     labList.textAlignment = NSTextAlignmentLeft;
     [self.table.tableHeaderView addSubview:labList];
     [labList mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(address.mas_bottom).with.offset(12);
+        make.top.mas_equalTo(self.btnAddress.mas_bottom).with.offset(12);
         make.right.mas_equalTo(@0);
         make.height.mas_equalTo(@40);
         make.left.mas_equalTo(@20);
     }];
-    
-//    NSString *strPlistPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"] stringByAppendingPathComponent:@"AddressData.plist"];
-//    NSMutableDictionary *dictPlist = [NSMutableDictionary dictionaryWithContentsOfFile:strPlistPath];
-//    if (dictPlist[@"address"]) {
-//        [dictPlist removeObjectForKey:@"address"];
-//        [dictPlist writeToFile:strPlistPath atomically:NO];
-//    }
     
     [self getDataFromPlist];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [_btnAddress setTitle:@"请选择收货地址" forState:UIControlStateNormal];
     if (self.dicAddress.count) {
-        _labName.text = self.dicAddress[@"name"];
-        _labPhone.text = self.dicAddress[@"phone"];
-        _labAddress.text = self.dicAddress[@"address"];
         _strAddressId = self.dicAddress[@"_id"];
-        [_btnAddress setTitle:@"" forState:UIControlStateNormal];
-        _viewAddress.hidden = NO;
+        [_btnAddress setTitle:self.dicAddress[@"address"] forState:UIControlStateNormal];
     }
     else {
-        _labAddress.text = @"";
         _strAddressId = @"";
-        _viewAddress.hidden = YES;
+        [_btnAddress setTitle:@"请选择地址" forState:UIControlStateNormal];
     }
 }
 
@@ -414,7 +340,7 @@
     // PaymentType 1支付宝 2微信
     NSDictionary *postDic = @{
                               @"command": @"changeOrder",
-                              @"state": @"2",
+                              @"state": @"4",
                               @"orderId": _orderid,
                               @"payType": paymentType
                               };

@@ -61,44 +61,6 @@
         make.top.mas_equalTo(@64);
         make.left.width.bottom.mas_equalTo(ws.view);
     }];
-    
-//    UIView *footerView = [UIView new];
-//    footerView.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:footerView];
-//    [footerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(ws.table.mas_bottom).with.offset(1);
-//        make.left.width.bottom.mas_equalTo(ws.view);
-//    }];
-//    UIButton *cancle = [UIButton new];
-//    cancle.backgroundColor = [UIColor whiteColor];
-//    cancle.titleLabel.font = fontTitleWithSize(18);
-//    [cancle setTitle:@"取消订单" forState:UIControlStateNormal];
-//    [cancle setTitleColor:FontColor forState:UIControlStateNormal];
-//    cancle.layer.cornerRadius = 20;
-//    cancle.layer.borderColor = FontColor.CGColor;
-//    cancle.layer.borderWidth = 1;
-//    [footerView addSubview:cancle];
-//    [cancle addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
-//    [cancle mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(footerView).with.offset(-WINDOW_WIDTH/4);
-//        make.width.mas_equalTo(@(Design_Width(232.0)));
-//        make.height.mas_equalTo(@(40));
-//        make.centerY.mas_equalTo(footerView);
-//    }];
-//    UIButton *pay = [UIButton new];
-//    pay.backgroundColor = OrangeColor;
-//    pay.titleLabel.font = fontTitleWithSize(18);
-//    [pay setTitle:@"立刻结算" forState:UIControlStateNormal];
-//    [pay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    pay.layer.cornerRadius = 20;
-//    [footerView addSubview:pay];
-//    [pay addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
-//    [pay mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(footerView).with.offset(WINDOW_WIDTH/4);
-//        make.width.mas_equalTo(@(Design_Width(232.0)));
-//        make.height.mas_equalTo(@(40));
-//        make.centerY.mas_equalTo(footerView);
-//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -200,7 +162,7 @@
         return 6;
     }
     else if (section == 1) {
-        return 3;
+        return 1;
     }
     else {
         return 1;
@@ -359,27 +321,9 @@
     else if (indexPath.section == 1) {
         // 地址信息部分
         if (_dicAddress.count) {
-            switch (indexPath.row) {
-                case 0: {
-                    name.text = @"收货人";
-                    description.text = _dicAddress[@"name"];
-                }
-                    break;
-                case 1: {
-                    name.text = @"收货地址";
-                    description.text = _dicAddress[@"address"];
-                    description.numberOfLines = 3;
-                }
-                    break;
-                case 2: {
-                    name.text = @"联系方式";
-                    description.text = _dicAddress[@"phone"];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
+            name.text = @"地址";
+            description.text = _dicAddress[@"address"];
+            description.numberOfLines = 3;
         }
     }
     else {

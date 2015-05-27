@@ -10,6 +10,7 @@
 #import "AdminProListViewController.h"
 #import "AdminNewActivityViewController.h"
 #import "AdminFeedbackViewController.h"
+#import "AddressListViewController.h"
 
 @interface AdminHomeViewController ()
 
@@ -66,7 +67,7 @@
     if (section) {
         return 1;
     }
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -97,6 +98,9 @@
         }
         else if (indexPath.row == 1) {
             product.text = @"反馈列表";
+        }
+        else if (indexPath.row == 2) {
+            product.text = @"地址列表";
         }
         else {
             product.text = @"发布活动";
@@ -130,6 +134,11 @@
         }
         else if (indexPath.row == 1) {
             AdminFeedbackViewController *viewController = [AdminFeedbackViewController new];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+        else if (indexPath.row == 2) {
+            AddressListViewController *viewController = [AddressListViewController new];
+            viewController.stateOfAddress = StateOfJustEdit;
             [self.navigationController pushViewController:viewController animated:YES];
         }
         else {

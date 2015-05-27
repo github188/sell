@@ -150,8 +150,7 @@ exports.register = function(req,callback){
 
 // 地址列表
 exports.addressList = function(req,callback){
-    var userId = req.query.userId;
-    addressProvider.find({userId: userId},{},function(err,result){
+    addressProvider.find({},{},function(err,result){
         if (err) {
             logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
             callback(global.warnCode.adminDbError);
@@ -165,18 +164,45 @@ exports.addressList = function(req,callback){
 // 地址详情
 exports.addressDetail = function(req,callback){
     var id = req.query.id;
-    addressProvider.findOne({_id:new ObjectID(id)},{},function(err,result){
-        if (err) {
-            logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
-            callback(global.warnCode.adminDbError);
-        } else if (result == null) {
-            callback(global.warnCode.adminDbError);
-        } else {
-            var s = result;
-            s.result = true;
-            callback(s);
-        }
-    });
+    var address = req.query.address;
+    if (id == "" || id == undefined || id == null) {
+        var json = {
+            _id : new ObjectID(),
+            address : address
+        };
+        addressProvider.insert(json, {}, function(err){
+            if (err) {
+                logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+                callback(global.warnCode.adminDbError);
+            }
+            else {
+                callback({"result":true,"isSuccess":true,message:""});
+            }
+        });
+    }
+    else {
+        addressProvider.findOne({_id:new ObjectID(id)},{},function(err,result){
+            if (err || result == null) {
+                logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+                callback(global.warnCode.adminDbError);
+            } else {
+                if (address == "" || address == undefined || address == null) {
+                    result.result = true;
+                    callback(result);
+                }
+                else {
+                    addressProvider.update({_id:new ObjectID(id)}, {$set:{address:address}}, function(err){
+                        if (err) {
+                            logger.warn(global.warnCode.adminDbError,":",req.url,req.body);
+                            callback(global.warnCode.adminDbError);
+                        } else {
+                            callback({result:true,isSuccess:true,message:""});
+                        }
+                    });
+                }
+            }
+        });
+    }
 };
 
 // 添加修改地址
